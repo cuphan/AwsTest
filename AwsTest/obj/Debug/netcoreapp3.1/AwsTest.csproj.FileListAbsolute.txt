@@ -1,0 +1,14 @@
+E:\Lambda Test\AwsTest\AwsTest\bin\Debug\netcoreapp3.1\AwsTest.deps.json
+E:\Lambda Test\AwsTest\AwsTest\bin\Debug\netcoreapp3.1\AwsTest.runtimeconfig.json
+E:\Lambda Test\AwsTest\AwsTest\bin\Debug\netcoreapp3.1\AwsTest.runtimeconfig.dev.json
+E:\Lambda Test\AwsTest\AwsTest\bin\Debug\netcoreapp3.1\AwsTest.dll
+E:\Lambda Test\AwsTest\AwsTest\bin\Debug\netcoreapp3.1\AwsTest.pdb
+E:\Lambda Test\AwsTest\AwsTest\bin\Debug\netcoreapp3.1\Amazon.Lambda.Core.dll
+E:\Lambda Test\AwsTest\AwsTest\bin\Debug\netcoreapp3.1\Amazon.Lambda.Serialization.SystemTextJson.dll
+E:\Lambda Test\AwsTest\AwsTest\obj\Debug\netcoreapp3.1\AwsTest.AssemblyInfoInputs.cache
+E:\Lambda Test\AwsTest\AwsTest\obj\Debug\netcoreapp3.1\AwsTest.AssemblyInfo.cs
+E:\Lambda Test\AwsTest\AwsTest\obj\Debug\netcoreapp3.1\AwsTest.csproj.CoreCompileInputs.cache
+E:\Lambda Test\AwsTest\AwsTest\obj\Debug\netcoreapp3.1\AwsTest.csproj.CopyComplete
+E:\Lambda Test\AwsTest\AwsTest\obj\Debug\netcoreapp3.1\AwsTest.dll
+E:\Lambda Test\AwsTest\AwsTest\obj\Debug\netcoreapp3.1\AwsTest.pdb
+E:\Lambda Test\AwsTest\AwsTest\obj\Debug\netcoreapp3.1\AwsTest.genruntimeconfig.cache
