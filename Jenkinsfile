@@ -77,10 +77,10 @@ pipeline {
           script {
             def commit_id = gv.commitID()
             sh "aws s3 cp ${commit_id}.zip s3://${params.s3_bucket}/${folder}/"
-            sleep(time: 15, unit: "SECONDS")
-            sh "aws lambda update-function-code --function-name ${params.lambda_function_name} --s3-bucket s3://${params.s3_bucket}/${folder}/${commit_id}.zip"
+            //sleep(time: 15, unit: "SECONDS")
+            //sh "aws lambda update-function-code --function-name ${params.lambda_function_name} --s3-bucket s3://${params.s3_bucket}/${folder}/${commit_id}.zip"
+            sh "aws lambda update-function-code --function-name ${params.lambda_function_name} --zip-file fileb://${commit_id}.zip"
           }
-          //sh "aws lambda update-function-code --function-name ${params.lambda_function_name} --zip-file fileb://AwsTest.zip"
         }
       }
     }
