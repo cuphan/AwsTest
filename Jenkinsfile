@@ -74,10 +74,13 @@ pipeline {
       steps {
         withAWS(credentials: 'aws-billidentity', region: 'ap-southeast-2') {
           sh "aws s3api put-object --bucket ${params.s3_bucket} --key ${folder}"
-          sh "aws s3 cp *.zip s3://${params.s3_bucket}/${folder}"
-          //sleep(time: 30, unit: "SECONDS")
-          //sh "aws lambda update-function-code --function-name ${params.lambda_function_name} --s3-bucket s3://${params.s3_bucket}/${folder}/AwsTest.zip"
-          sh "aws lambda update-function-code --function-name ${params.lambda_function_name} --zip-file fileb://AwsTest.zip"
+          script {
+            def commit_id = gv.commitID()
+            sh "aws s3 cp ${commit_id}.zip s3://${params.s3_bucket}/${folder}"
+            sleep(time: 15, unit: "SECONDS")
+            sh "aws lambda update-function-code --function-name ${params.lambda_function_name} --s3-bucket s3://${params.s3_bucket}/${folder}/${commit_id}.zip"
+          }
+          //sh "aws lambda update-function-code --function-name ${params.lambda_function_name} --zip-file fileb://AwsTest.zip"
         }
       }
     }
@@ -88,10 +91,10 @@ pipeline {
       }
       steps {
         withAWS(credentials: 'aws-billidentity', region: 'ap-southeast-2') {
-          //sh "aws s3api put-object --bucket ${params.s3_bucket} --key ${folder}"
-          //sh "aws s3 cp *.zip s3://${params.s3_bucket}/${folder}"
-          //sh "aws lambda create-function --function-name ${params.lambda_function_name} --runtime ${params.dotnet_core_version} --code S3Bucket=s3://${params.s3_bucket}/${folder} --role ${params.lambda_role}"
-          sh "aws lambda create-function --function-name ${params.lambda_function_name} --runtime ${params.dotnet_core_version} --handler ${params.lambda_handler} --zip-file fileb://AwsTest.zip --role ${params.lambda_role}"
+          script {
+            def commit_id = gv.commitID()
+            sh "aws lambda create-function --function-name ${params.lambda_function_name} --runtime ${params.dotnet_core_version} --handler ${params.lambda_handler} --zip-file fileb://${commit_id}.zip --role ${params.lambda_role}"
+          }
         }
       }
     }
