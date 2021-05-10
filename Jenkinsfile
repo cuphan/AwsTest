@@ -1,3 +1,5 @@
+def gv
+
 pipeline {
   agent any
 
@@ -17,6 +19,15 @@ pipeline {
   }
 
   stages {
+    stage('Init') {
+      steps {
+        script {
+          gv = load ".jenkins/script.groovy"
+          gv.initApp()
+        }
+      }
+    }
+
     stage('Checkout') {
       steps {
         git branch: 'master', url: 'https://github.com/vietphan-billidentity/AwsTest.git'
