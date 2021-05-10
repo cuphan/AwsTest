@@ -23,7 +23,6 @@ pipeline {
       steps {
         script {
           gv = load ".jenkins/script.groovy"
-          gv.initApp()
         }
       }
     }
@@ -61,7 +60,10 @@ pipeline {
     stage('Publish and zip') {
       steps {
         sh 'dotnet publish -o Publish'
-        sh "zip -r AwsTest.zip Publish/"
+        script {
+          def commit_id = gv.commitID()
+          sh "zip -r ${commit_id}.zip Publish/"
+        }
       }
     }
 
