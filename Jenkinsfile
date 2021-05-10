@@ -73,7 +73,7 @@ pipeline {
       }
       steps {
         withAWS(credentials: 'aws-billidentity', region: 'ap-southeast-2') {
-          sh "aws s3api put-object --bucket ${params.s3_bucket} --key ${folder}"
+          sh "aws s3api put-object --bucket ${params.s3_bucket} --key ${folder}/"
           script {
             def commit_id = gv.commitID()
             sh "aws s3 cp ${commit_id}.zip s3://${params.s3_bucket}/${folder}/"
