@@ -98,5 +98,14 @@ pipeline {
         }
       }
     }
+
+    stage('Clean up') {
+      steps {
+        sh 'rm *.zip'
+        sh 'rm -rf Publish/*'
+        sh 'rm -rf AwsTest/bin/'
+        sh 'rm -rf AwsTest.Tests/bin/'
+      }
+    }
   }
 }
