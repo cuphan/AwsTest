@@ -76,7 +76,7 @@ pipeline {
           sh "aws s3api put-object --bucket ${params.s3_bucket} --key ${folder}"
           script {
             def commit_id = gv.commitID()
-            sh "aws s3 cp ${commit_id}.zip s3://${params.s3_bucket}/${folder}"
+            sh "aws s3 cp ${commit_id}.zip s3://${params.s3_bucket}/${folder}/"
             sleep(time: 15, unit: "SECONDS")
             sh "aws lambda update-function-code --function-name ${params.lambda_function_name} --s3-bucket s3://${params.s3_bucket}/${folder}/${commit_id}.zip"
           }
