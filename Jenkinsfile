@@ -15,7 +15,7 @@ pipeline {
   environment {
     dotnet = '/usr/bin/dotnet'
     //now = sh(returnStdout: true, script: 'date +%Y-%m-%d-%H-%M').trim()
-    folder = "lambda/AwsTest/"
+    folder = "lambda/AwsTest"
   }
 
   stages {
