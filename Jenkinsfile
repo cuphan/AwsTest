@@ -35,31 +35,31 @@ pipeline {
 
     stage('Restore PACKAGES') {
       steps {
-        sh "dotnet restore"
+        sh "$dotnet restore"
       }
     }
 
     stage('Clean') {
       steps {
-        sh 'dotnet clean'
+        sh "$dotnet clean"
       }
     }
 
     stage('Build') {
       steps {
-        sh 'dotnet build --configuration Release'
+        sh "$dotnet build --configuration Release"
       }
     }
 
     stage('Test') {
       steps {
-        sh 'dotnet test AwsTest.Tests/AwsTest.Tests.csproj'
+        sh "$dotnet test AwsTest.Tests/AwsTest.Tests.csproj"
       }
     }
 
     stage('Publish and zip') {
       steps {
-        sh 'dotnet publish -o Publish'
+        sh "$dotnet publish -o Publish"
         script {
           def commit_id = gv.commitID()
           sh "zip -r ${commit_id}.zip Publish/"
