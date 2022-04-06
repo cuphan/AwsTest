@@ -2,6 +2,9 @@ agents:
   queue: "default"
 
 steps:
+  - command: "buildkite-agent pipeline upload"
+    label: ":pipeline:"
+
   - command: "make restore clean"
     label: "Restore and clean"
 
