@@ -1,5 +1,5 @@
 COMPOSE_RUN = docker-compose run dotnet
-AWS_REGION = ap-southeast-2
+AWS_REGION  = ap-southeast-2
 GIT_SHA := $(shell git rev-parse --short HEAD)
 
 shell: 

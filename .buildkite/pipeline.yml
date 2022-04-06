@@ -2,7 +2,6 @@ agents:
   queue: "default"
 
 steps:
-
   - command: "make restore clean"
     label: "Restore and clean"
 
