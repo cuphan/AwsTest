@@ -9,3 +9,8 @@ steps:
 
   - command: "make build test"
     label: "Build and test"
+
+  - wait
+
+  - command: "make publish"
+    label: "Publish and clean"
