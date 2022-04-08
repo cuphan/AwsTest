@@ -2,7 +2,9 @@ agents:
   queue: "default"
 
 steps:
-  - command: "make restore clean"
+  - commands: 
+      - "dotnet restore"
+      - "dotnet clean"
     label: "restore and clean project"
     plugins:
       - docker#v3.12.0:
@@ -11,7 +13,9 @@ steps:
 
   - wait
 
-  - command: "make build test"
+  - commands: 
+      - "dotnet build -c Release
+      - "dotnet test AwsTest.Tests/AwsTest.Tests.csproj"
     label: "build and test project"
     plugins:
       - docker#v3.12.0:
