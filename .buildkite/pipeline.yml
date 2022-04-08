@@ -3,14 +3,27 @@ agents:
 
 steps:
   - command: "make restore clean"
-    label: "Restore and clean"
+    label: "restore and clean project"
+    plugins:
+      - docker#v3.12.0:
+          image: "sdk:3.1-buster"
+          always-pull: true
 
   - wait
 
   - command: "make build test"
-    label: "Build and test"
+    label: "build and test project"
+    plugins:
+      - docker#v3.12.0:
+          image: "sdk:3.1-buster"
+          always-pull: true
 
-  - wait
+  # - wait
 
-  - command: "make publish"
-    label: "Publish and clean"
+  # - command: "make publish clean"
+  #   label: "Publish and clean"
+
+  # - wait
+
+  # - command: "make upload cleanup"
+  #   label: "Upload to S3 and cleanup"
