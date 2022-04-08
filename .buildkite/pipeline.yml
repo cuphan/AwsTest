@@ -2,34 +2,37 @@ agents:
   queue: "default"
 
 steps:
-  - label: ":docker: run dotnet restore and clean project"
+  - label: ":docker: run restore, clean, build, test and publish"
     commands: 
       - "dotnet restore"
       - "dotnet clean"
-    plugins:
-      - docker#v3.12.0:
-          image: "mcr.microsoft.com/dotnet/core/sdk:3.1-buster"
-          always-pull: true
-
-  - wait
-
-  - label: ":docker: run dotnet build and test project :bomb:"
-    commands: 
       - "dotnet build -c Release"
       - "dotnet test AwsTest.Tests/AwsTest.Tests.csproj"
+      - "dotnet publish -o Publish"
     plugins:
       - docker#v3.12.0:
           image: "mcr.microsoft.com/dotnet/core/sdk:3.1-buster"
           always-pull: true
 
-  - wait
+  # - wait
 
-  - label: ":docker: run dotnet publish project"
-    command: "dotnet publish -o Publish"
-    plugins:
-      - docker#v3.12.0:
-          image: "mcr.microsoft.com/dotnet/core/sdk:3.1-buster"
-          always-pull: true
+  # - label: ":docker: run dotnet build and test project :bomb:"
+  #   commands: 
+  #     - "dotnet build -c Release"
+  #     - "dotnet test AwsTest.Tests/AwsTest.Tests.csproj"
+  #   plugins:
+  #     - docker#v3.12.0:
+  #         image: "mcr.microsoft.com/dotnet/core/sdk:3.1-buster"
+  #         always-pull: true
+
+  # - wait
+
+  # - label: ":docker: run dotnet publish project"
+  #   command: "dotnet publish -o Publish"
+  #   plugins:
+  #     - docker#v3.12.0:
+  #         image: "mcr.microsoft.com/dotnet/core/sdk:3.1-buster"
+  #         always-pull: true
 
   # - wait
 
