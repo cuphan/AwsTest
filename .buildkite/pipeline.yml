@@ -14,7 +14,7 @@ steps:
   - wait
 
   - commands: 
-      - "dotnet build -c Release
+      - "dotnet build -c Release"
       - "dotnet test AwsTest.Tests/AwsTest.Tests.csproj"
     label: "build and test project"
     plugins:
