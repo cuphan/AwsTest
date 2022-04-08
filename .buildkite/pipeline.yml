@@ -9,10 +9,16 @@ steps:
       - "dotnet build -c Release"
       - "dotnet test AwsTest.Tests/AwsTest.Tests.csproj"
       - "dotnet publish -o Publish"
+      - "ls -lha Publish/"
     plugins:
       - docker#v3.12.0:
           image: "mcr.microsoft.com/dotnet/core/sdk:3.1-buster"
           always-pull: true
+    #   - docker#v3.12.0:
+    #       image: "amazon/aws-cli:latest"
+    #       always-pull: true
+    #       command: ["s3", "sync", "s3://my-bucket/dist/", "/app/dist"]
+    # artifact_paths: "dist/**"          
 
   # - wait
 
