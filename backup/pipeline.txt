@@ -1,0 +1,21 @@
+agents:
+  queue: "default"
+
+steps:
+  - command: "make restore clean"
+    label: "Restore and clean"
+
+  - wait
+
+  - command: "make build test"
+    label: "Build and test"
+
+  - wait
+
+  - command: "make publish clean"
+    label: "Publish and clean"
+
+  - wait
+
+  - command: "make upload cleanup"
+    label: "Upload to S3 and cleanup"
