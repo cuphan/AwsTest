@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+
+  dotnet:
+    image: mcr.microsoft.com/dotnet/sdk:3.1-alpine
+    volumes:
+      - ./:/app
+    working_dir: /app/AwsTest
+  
+  zip:
+    build: .
+    volumes:
+      - ./:/app
+    working_dir: /app/AwsTest
+  
+  aws:
+    image: amazon/aws-cli
+    volumes:
+      - ./:/app
+      - ~/.aws:/root/.aws
+    working_dir: /app/AwsTest
+
+  #dotnet-core:
+  #  image: dotnet-core-sdk:3.1
+    #env_file: .env
+  #  volumes:
+      #- $HOME/.aws:/root/.aws
+  #    - .:/usr/src/app
+  #  working_dir: /usr/src/app
+
+  # envvars:
+  #   image: flemay/envvars:latest
+  #   env_file: .env
+  #   working_dir: /work
+  #   volumes:
+  #     - .:/work

@@ -1,24 +1,38 @@
 S3_BUCKET = lambda-function-billidentity
 GIT_SHA := $(shell git rev-parse --short HEAD)
+COMPOSE_RUN = docker-compose run --rm dotnet
+ZIP_COMPOSE_RUN = docker-compose run --rm zip
 
+.PHONY: shell
+shell:
+	$(COMPOSE_RUN) sh
+
+.PHONY: restore
 restore:
-	dotnet restore
+	$(COMPOSE_RUN) dotnet restore
 
-clean:
-	dotnet clean
+.PHONY: clean
+clean: restore
+	$(COMPOSE_RUN) dotnet clean	
 
-build:
-	dotnet build -c Release
+.PHONY: build
+build: clean
+	$(COMPOSE_RUN) dotnet build -c Release
 
-test: 
-	dotnet test AwsTest.Tests/AwsTest.Tests.csproj
+.PHONY: test
+test: build
+	$(COMPOSE_RUN) dotnet test AwsTest.Tests/AwsTest.Tests.csproj
 
-publish:
-	dotnet publish -o Publish
-	zip -r $(GIT_SHA).zip Publish/
+.PHONY: publish
+publish: build
+	$(COMPOSE_RUN) dotnet publish -o Publish
 
-upload:
-	aws s3 cp $(GIT_SHA).zip s3://$(S3_BUCKET)/
+.PHONY: zip
+zip: publish
+	$(ZIP_COMPOSE_RUN) zip -r $(GIT_SHA).zip Publish/
 
-cleanup:
-	rm $(GIT_SHA).zip
+.PHONY: upload
+upload: zip
+	docker-compose run --rm aws --version
+	docker-compose run --rm aws --profile bidenergy s3 ls
+	#docker-compose run --rm aws s3 cp $(GIT_SHA).zip s3://$(S3_BUCKET)/

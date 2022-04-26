@@ -2,18 +2,30 @@ agents:
   queue: "default"
 
 steps:
-  - label: ":docker: run restore, clean, build, test and publish"
-    commands: 
-      - "dotnet restore"
-      - "dotnet clean"
-      - "dotnet build -c Release"
-      - "dotnet test AwsTest.Tests/AwsTest.Tests.csproj"
-      - "dotnet publish -o Publish"
-      - "ls -lha Publish/"
-    plugins:
-      - docker#v3.12.0:
-          image: "mcr.microsoft.com/dotnet/core/sdk:3.1-buster"
-          always-pull: true
+  - label: "Build and upload to S3"
+    command: make upload
+
+  # - label: "Build and Test"
+  #   command: make build test
+
+  # - wait
+
+  # - label: "Publish and Upload"
+  #   command: make publish upload
+
+  # - label: ":docker: run restore, clean, build, test and publish"
+  #   commands: 
+  #     - "dotnet restore"
+  #     - "dotnet clean"
+  #     - "dotnet build -c Release"
+  #     - "dotnet test AwsTest.Tests/AwsTest.Tests.csproj"
+  #     - "dotnet publish -o Publish"
+  #     - "ls -lha Publish/"
+  #     - "zip "
+  #   plugins:
+  #     - docker#v3.12.0:
+  #         image: "mcr.microsoft.com/dotnet/core/sdk:3.1-buster"
+  #         always-pull: true
     #   - docker#v3.12.0:
     #       image: "amazon/aws-cli:latest"
     #       always-pull: true
